@@ -1,0 +1,12 @@
+{
+  "name": "gren",
+  "version": "1.0.0",
+  "description": "git pull request tools",
+  "main": "index.js",
+  "repository": "git@github.com:miklosme/gren.git",
+  "author": "miklosme <m.miklos05@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "graphql-request": "^1.6.0"
+  }
+}
