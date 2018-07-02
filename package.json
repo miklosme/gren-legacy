@@ -2,11 +2,22 @@
   "name": "gren",
   "version": "1.0.0",
   "description": "git pull request tools",
-  "main": "index.js",
+  "main": "src/index.js",
   "repository": "git@github.com:miklosme/gren.git",
   "author": "miklosme <m.miklos05@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "graphql-request": "^1.6.0"
+    "app-root-path": "^2.1.0",
+    "graphql-request": "^1.6.0",
+    "node-fetch": "^2.1.2"
+  },
+  "devDependencies": {
+    "prettier": "^1.13.7"
+  },
+  "prettier": {
+    "printWidth": 120,
+    "tabWidth": 4,
+    "singleQuote": true,
+    "trailingComma": "all"
   }
 }
