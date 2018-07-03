@@ -3,7 +3,7 @@ const getBranchName = require('../helpers/get-branch-name');
 const client = require('../graphql/client');
 
 const query = `
-    query ReadBotComment($owner: String!, $name: String!, $branchName: String!) {
+    query ReadPullRequestInfo($owner: String!, $name: String!, $branchName: String!) {
         repository(owner: $owner, name: $name) {
             pullRequests(last:1, headRefName: $branchName) {
                 edges {
@@ -33,7 +33,7 @@ const query = `
     }
 `;
 
-module.exports = function readBotComment() {
+module.exports = function readPullRequestInfo() {
     const branchName = getBranchName();
     const repoInfo = getRepoInfo();
     return client.request(query, { ...repoInfo, branchName });
