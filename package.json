@@ -7,9 +7,9 @@
   "author": "miklosme <m.miklos05@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@octokit/rest": "^15.9.4",
     "app-root-path": "^2.1.0",
-    "graphql-request": "^1.6.0",
-    "node-fetch": "^2.1.2"
+    "graphql-request": "^1.6.0"
   },
   "devDependencies": {
     "prettier": "^1.13.7"
