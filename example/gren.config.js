@@ -1,10 +1,11 @@
+const React = require('react');
 const { message, warn, fail, checkCommand, reduce } = require('../src/index');
 
 // the way to add pre-defined tasks from npm
 module.exports.tasks = {
-    jestPlugin,
-    ...flowTools,
-    prettier,
+    // jestPlugin,
+    // ...flowTools,
+    // prettier,
 };
 
 // adding own tasks
@@ -32,9 +33,9 @@ module.exports.tasks.eslint = async () => {
 
 const Fail = ({ fail }) => <li>{fail}</li>;
 
-module.exports.buildReport = props => {
+module.exports.buildReport = props => (
     <p>
         <ul>{props.fails.map(fail => <Fail fail={fail} />)}</ul>
         <p>{props.eslintErrors}</p>
-    </p>;
-};
+    </p>
+);
