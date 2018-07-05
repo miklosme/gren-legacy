@@ -1,0 +1,41 @@
+{
+  "name": "gren",
+  "version": "1.0.0",
+  "description": "git pull request tools",
+  "main": "src/index.js",
+  "bin": {
+    "gren": "babel-node src/cli.js"
+  },
+  "repository": "git@github.com:miklosme/gren.git",
+  "author": "miklosme <m.miklos05@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/core": "^7.0.0-beta.51",
+    "@babel/node": "^7.0.0-beta.51",
+    "@babel/preset-env": "^7.0.0-beta.51",
+    "@babel/preset-react": "^7.0.0-beta.51",
+    "@octokit/rest": "^15.9.4",
+    "app-root-path": "^2.1.0",
+    "graphql-request": "^1.6.0",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1"
+  },
+  "devDependencies": {
+    "prettier": "^1.13.7"
+  },
+  "prettier": {
+    "printWidth": 120,
+    "tabWidth": 4,
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
+  "babel": {
+    "presets": [
+      "@babel/env",
+      "@babel/react"
+    ]
+  },
+  "scripts": {
+    "doit": "babel-node src/cli.js"
+  }
+}
