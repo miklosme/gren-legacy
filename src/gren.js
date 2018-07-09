@@ -1,19 +1,17 @@
-require('@babel/register')({
-    only: [/gren\.config\.(js|jsx)$/],
-});
-
 import { exec } from 'child_process';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import submitBotReport from './github/submit-bot-report';
 import { getState } from './index';
+import getTranspiledConfig from './helpers/get-transpiled-config';
+import { secondsSince, borderText, reflect } from './helpers/utils';
 
-function cmd(command) {
+function cmd(command, name) {
     return new Promise((resolve, reject) => {
         exec(command, (error, stdout) => {
-            // console.log(borderText(command));
-            // console.log()
-            // console.log(stdout)
+            console.log(borderText(name));
+            console.log();
+            console.log(stdout);
 
             if (error) {
                 reject(stdout.trim());
@@ -25,13 +23,12 @@ function cmd(command) {
 }
 
 async function gren({ config: configPath }) {
-    console.log('WATCH', 'configPath', configPath);
-    const config = require(configPath);
-
+    const config = await getTranspiledConfig(configPath);
     const mainStart = Date.now();
     const performance = {
         tasks: {},
     };
+
     await Promise.all(
         Object.entries(config.tasks)
             .map(([name, task]) => async () => {
@@ -42,7 +39,7 @@ async function gren({ config: configPath }) {
                 if (job.command) {
                     let result = null;
                     try {
-                        result = await cmd(job.command);
+                        result = await cmd(job.command, name);
                         if (job.onSuccess) job.onSuccess(result);
                     } catch (errorResult) {
                         if (job.onError) job.onError(errorResult);
@@ -63,16 +60,17 @@ async function gren({ config: configPath }) {
         performance,
     };
 
+    const exitCode = state.fails ? state.fails.length : 0;
+
     const DefaultReport = <h1>pretty dope pr, my dude!</h1>;
     const Report = config.buildReport || DefaultReport;
     const htmlReport = ReactDOMServer.renderToStaticMarkup(<Report {...state} />);
 
     await submitBotReport(htmlReport);
 
-    console.log('all seems good');
+    console.log(`Gren successfully finished with exit code ${exitCode}.`);
 
-    // TODO exit code
-    return 0;
+    return exitCode;
 }
 
 export default gren;

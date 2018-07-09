@@ -17,14 +17,14 @@
         "@babel/plugin-transform-runtime": "^7.0.0-beta.52",
         "@babel/preset-env": "^7.0.0-beta.52",
         "@babel/preset-react": "^7.0.0-beta.52",
-        "@babel/register": "^7.0.0-beta.52",
         "@babel/runtime": "^7.0.0-beta.52",
         "@octokit/rest": "^15.9.4",
         "app-root-path": "^2.1.0",
         "graphql-request": "^1.6.0",
         "meow": "^5.0.0",
         "react": "^16.4.1",
-        "react-dom": "^16.4.1"
+        "react-dom": "^16.4.1",
+        "require-from-string": "^2.0.2"
     },
     "devDependencies": {
         "husky": "^0.14.3",
