@@ -35,6 +35,6 @@
   },
   "scripts": {
     "precommit": "yarn run format",
-    "format": "git diff origin/master... --name-only --diff-filter=ACM | grep -E \"^src/.*\\.js$\" | xargs -I % sh -c 'prettier --write; git add;'"
+    "format": "git diff origin/master... --name-only --diff-filter=ACM | grep -E \"^src/.*\\.js$\" | xargs prettier --write; git add --all"
   }
 }
