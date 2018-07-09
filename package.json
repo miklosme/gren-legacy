@@ -7,7 +7,7 @@
         "gren": "cli.js"
     },
     "repository": "git@github.com:miklosme/gren.git",
-    "author": "miklosme <m.miklos05@gmail.com>",
+    "author": "miklosme <miklos@eclecticiq.com>",
     "license": "MIT",
     "dependencies": {
         "@babel/cli": "^7.0.0-beta.52",
