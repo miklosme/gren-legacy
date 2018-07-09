@@ -42,7 +42,7 @@
         "clean": "rm -rf dist",
         "build:legacy": "BABEL_ENV=legacy babel src -d dist/legacy",
         "build:modern": "BABEL_ENV=modern babel src -d dist/modern",
-        "build:all": "yarn run clean && yarn build:legacy && yarn build:modern",
-        "prepublish": "yarn build:all"
+        "build": "yarn run clean && yarn build:legacy && yarn build:modern",
+        "prepublish": "yarn build"
     }
 }
