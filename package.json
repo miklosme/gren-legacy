@@ -33,13 +33,8 @@
     "singleQuote": true,
     "trailingComma": "all"
   },
-  "babel": {
-    "presets": [
-      "@babel/env",
-      "@babel/react"
-    ]
-  },
   "scripts": {
-    "doit": "babel-node src/cli.js"
+    "precommit": "yarn run format",
+    "format": "git diff origin/master... --name-only --diff-filter=ACM | grep -E \"^src/.*\\.js$\" | xargs prettier --write && git add"
   }
 }
