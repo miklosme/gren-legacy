@@ -1,5 +1,5 @@
 require('@babel/register')({
-    only: /gren\.config\.(js|jsx)$/,
+    only: [/gren\.config\.(js|jsx)$/],
 });
 
 import { exec } from 'child_process';
