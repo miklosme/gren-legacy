@@ -23,7 +23,7 @@ function cmd(command) {
     });
 }
 
-(async () => {
+export default gren = async () => {
     const mainStart = Date.now();
     const performance = {
         tasks: {},
@@ -66,7 +66,7 @@ function cmd(command) {
     await submitBotReport(htmlReport);
 
     console.log('all seems good');
-})();
+};
 
 // util functions
 
