@@ -49,11 +49,7 @@ function cmd(command) {
 
                 performance.tasks[name] = secondsSince(start);
             })
-
-
-
-
-            .map(fn => (console.log(fn), fn()))
+                                .map(fn => (console.log(fn), fn()))
             .map(reflect),
     );
     performance.main = secondsSince(mainStart);
