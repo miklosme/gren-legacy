@@ -1,11 +1,8 @@
 import { exec } from 'child_process';
-
-const React = require('react');
-const ReactDOMServer = require('react-dom/server');
-const submitBotReport = require('./github/submit-bot-report');
-const { getState } = require('./index');
-
-const config = require('../example/gren.config.js');
+import React from 'react';
+import ReactDOMServer from 'react-dom/server';
+import submitBotReport from './github/submit-bot-report';
+import { getState } from './index';
 
 function cmd(command) {
     return new Promise((resolve, reject) => {
@@ -23,7 +20,10 @@ function cmd(command) {
     });
 }
 
-export default gren = async () => {
+async function gren({ config: configPath }) {
+    console.log('WATCH', 'configPath', configPath);
+    const config = require(configPath);
+
     const mainStart = Date.now();
     const performance = {
         tasks: {},
@@ -49,7 +49,7 @@ export default gren = async () => {
 
                 performance.tasks[name] = secondsSince(start);
             })
-            .map(fn => (console.log(fn), fn()))
+            .map(fn => fn())
             .map(reflect),
     );
     performance.main = secondsSince(mainStart);
@@ -66,20 +66,9 @@ export default gren = async () => {
     await submitBotReport(htmlReport);
 
     console.log('all seems good');
-};
 
-// util functions
-
-function borderText(text) {
-    const middle = `** ${text} **`;
-    const border = '*'.repeat(middle.length);
-    return `${border}\n${middle}\n${border}`;
+    // TODO exit code
+    return 0;
 }
 
-function secondsSince(start) {
-    return Math.floor((Date.now() - start) / 10) / 100;
-}
-
-function reflect(promise) {
-    return promise.then(value => ({ value, status: 'resolved' }), error => ({ error, status: 'rejected' }));
-}
+export default gren;
