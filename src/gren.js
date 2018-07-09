@@ -3,8 +3,10 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import submitBotReport from './github/submit-bot-report';
 import { getState } from './index';
+import setCommitStatus from './github/set-commit-status';
 import getTranspiledConfig from './helpers/get-transpiled-config';
 import { secondsSince, borderText, reflect } from './helpers/utils';
+import { checkStatuses } from './commons/constants';
 
 function cmd(command, name) {
     return new Promise((resolve, reject) => {
@@ -28,6 +30,8 @@ async function gren({ config: configPath }) {
     const performance = {
         tasks: {},
     };
+
+    await setCommitStatus(checkStatuses.pending);
 
     await Promise.all(
         Object.entries(config.tasks)
@@ -67,6 +71,8 @@ async function gren({ config: configPath }) {
     const htmlReport = ReactDOMServer.renderToStaticMarkup(<Report {...state} />);
 
     await submitBotReport(htmlReport);
+
+    await setCommitStatus(exitCode ? checkStatuses.failure : checkStatuses.success);
 
     console.log(`Gren successfully finished with exit code ${exitCode}.`);
 
