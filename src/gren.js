@@ -1,3 +1,7 @@
+require('@babel/register')({
+    only: /gren\.config\.(js|jsx)$/,
+});
+
 import { exec } from 'child_process';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';

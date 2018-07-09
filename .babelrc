@@ -2,12 +2,13 @@
   "env": {
     "test": {
       "presets": [
-        "flow", ["env", {
+        ["@babel/env", {
           "loose": true,
           "targets": {
             "node": "current"
           }
-        }]
+        }],
+        "@babel/react"
       ],
       "plugins": [
         "@babel/plugin-proposal-class-properties",
@@ -17,12 +18,13 @@
     },
     "legacy": {
       "presets": [
-        "flow", ["env", {
+        ["@babel/env", {
           "loose": true,
           "targets": {
             "node": 4
           }
-        }]
+        }],
+        "@babel/react"
       ],
       "plugins": [
         "@babel/plugin-proposal-class-properties",
@@ -32,12 +34,13 @@
     },
     "modern": {
       "presets": [
-        "flow", ["env", {
+        ["@babel/env", {
           "loose": true,
           "targets": {
             "node": 8
           }
-        }]
+        }],
+        "@babel/react"
       ],
       "plugins": [
         "@babel/plugin-proposal-class-properties",
