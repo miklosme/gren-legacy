@@ -52,7 +52,7 @@ function cmd(command) {
             .map(fn => (console.log(fn), fn()))
             .map(reflect),
     );
-    performance.main = secondsSince(mainStart);
+                performance.main = secondsSince(mainStart);
 
     const state = {
         ...getState(),
