@@ -12,6 +12,9 @@
   "dependencies": {
     "@babel/core": "^7.0.0-beta.51",
     "@babel/node": "^7.0.0-beta.51",
+    "@babel/plugin-proposal-class-properties": "^7.0.0-beta.52",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.52",
+    "@babel/plugin-transform-runtime": "^7.0.0-beta.52",
     "@babel/preset-env": "^7.0.0-beta.51",
     "@babel/preset-react": "^7.0.0-beta.51",
     "@octokit/rest": "^15.9.4",
@@ -21,6 +24,7 @@
     "react-dom": "^16.4.1"
   },
   "devDependencies": {
+    "husky": "^0.14.3",
     "prettier": "^1.13.7"
   },
   "prettier": {

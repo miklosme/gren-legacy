@@ -1,0 +1,49 @@
+{
+  "env": {
+    "test": {
+      "presets": [
+        "flow", ["env", {
+          "loose": true,
+          "targets": {
+            "node": "current"
+          }
+        }]
+      ],
+      "plugins": [
+        "@babel/plugin-proposal-class-properties",
+        "@babel/plugin-proposal-object-rest-spread",
+        "@babel/plugin-transform-runtime"
+      ]
+    },
+    "legacy": {
+      "presets": [
+        "flow", ["env", {
+          "loose": true,
+          "targets": {
+            "node": 4
+          }
+        }]
+      ],
+      "plugins": [
+        "@babel/plugin-proposal-class-properties",
+        "@babel/plugin-proposal-object-rest-spread",
+        "@babel/plugin-transform-runtime"
+      ]
+    },
+    "modern": {
+      "presets": [
+        "flow", ["env", {
+          "loose": true,
+          "targets": {
+            "node": 8
+          }
+        }]
+      ],
+      "plugins": [
+        "@babel/plugin-proposal-class-properties",
+        "@babel/plugin-proposal-object-rest-spread",
+        "@babel/plugin-transform-runtime"
+      ]
+    }
+  }
+}
