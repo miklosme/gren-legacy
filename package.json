@@ -38,7 +38,7 @@
     "scripts": {
         "precommit": "yarn run format",
         "postcommit": "git add .",
-        "format": "git diff origin/master... --name-only --diff-filter=ACM | grep -E \".*\\.(js|json)$\" | xargs prettier --write; git add --all",
+        "format": "git diff origin/master... --name-only --diff-filter=ACM | grep -E \"\\.(js|json)$\" | xargs prettier --write; git add --all",
         "clean": "rm -rf dist",
         "build:legacy": "BABEL_ENV=legacy babel src -d dist/legacy",
         "build:modern": "BABEL_ENV=modern babel src -d dist/modern",
