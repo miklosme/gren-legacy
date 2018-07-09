@@ -61,7 +61,7 @@ function cmd(command) {
 
     const DefaultReport = <h1>pretty dope pr, my dude!</h1>;
                         const Report = config.buildReport || DefaultReport;
-    const htmlReport = ReactDOMServer.renderToStaticMarkup(<Report {...state} />);
+            const htmlReport = ReactDOMServer.renderToStaticMarkup(<Report {...state} />);
 
     await submitBotReport(htmlReport);
 
