@@ -1,6 +1,6 @@
 {
     "name": "gren",
-    "version": "1.0.0",
+    "version": "0.1.0",
     "description": "git pull request tools",
     "main": "src/index.js",
     "bin": {
