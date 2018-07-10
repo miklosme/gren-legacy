@@ -23,8 +23,9 @@ module.exports = async function setCommitStatus(status) {
         repo,
         sha,
         state,
-        // TODO: make this automatic
-        // target_url: 'https://foo.bar/',
+        // TODO make it support other ci
+        // BUILD_URL comes from jenkins
+        target_url: process.env.BUILD_URL,
         description: checkStatusMessages[status],
         context: 'gren',
     });

@@ -8,7 +8,7 @@ module.exports.checkStatuses = {
 };
 
 module.exports.checkStatusMessages = {
-    error: "Don\'t worry, anything can be fixed!",
+    error: "Don't worry, anything can be fixed!",
     failure: 'Something went wrong.',
     pending: 'Please wait...',
     success: 'All good!',
