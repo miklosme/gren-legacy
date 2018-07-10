@@ -1,41 +1,49 @@
 {
-  "name": "gren",
-  "version": "1.0.0",
-  "description": "git pull request tools",
-  "main": "src/index.js",
-  "bin": {
-    "gren": "babel-node src/cli.js"
-  },
-  "repository": "git@github.com:miklosme/gren.git",
-  "author": "miklosme <m.miklos05@gmail.com>",
-  "license": "MIT",
-  "dependencies": {
-    "@babel/core": "^7.0.0-beta.51",
-    "@babel/node": "^7.0.0-beta.51",
-    "@babel/preset-env": "^7.0.0-beta.51",
-    "@babel/preset-react": "^7.0.0-beta.51",
-    "@octokit/rest": "^15.9.4",
-    "app-root-path": "^2.1.0",
-    "graphql-request": "^1.6.0",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1"
-  },
-  "devDependencies": {
-    "prettier": "^1.13.7"
-  },
-  "prettier": {
-    "printWidth": 120,
-    "tabWidth": 4,
-    "singleQuote": true,
-    "trailingComma": "all"
-  },
-  "babel": {
-    "presets": [
-      "@babel/env",
-      "@babel/react"
-    ]
-  },
-  "scripts": {
-    "doit": "babel-node src/cli.js"
-  }
+    "name": "gren",
+    "version": "1.0.0",
+    "description": "git pull request tools",
+    "main": "src/index.js",
+    "bin": {
+        "gren": "cli.js"
+    },
+    "repository": "git@github.com:miklosme/gren.git",
+    "author": "miklosme <miklos@eclecticiq.com>",
+    "license": "MIT",
+    "dependencies": {
+        "@babel/cli": "^7.0.0-beta.52",
+        "@babel/core": "^7.0.0-beta.52",
+        "@babel/plugin-proposal-class-properties": "^7.0.0-beta.52",
+        "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.52",
+        "@babel/plugin-transform-runtime": "^7.0.0-beta.52",
+        "@babel/preset-env": "^7.0.0-beta.52",
+        "@babel/preset-react": "^7.0.0-beta.52",
+        "@babel/runtime": "^7.0.0-beta.52",
+        "@octokit/rest": "^15.9.4",
+        "app-root-path": "^2.1.0",
+        "graphql-request": "^1.6.0",
+        "meow": "^5.0.0",
+        "react": "^16.4.1",
+        "react-dom": "^16.4.1",
+        "require-from-string": "^2.0.2"
+    },
+    "devDependencies": {
+        "husky": "^0.14.3",
+        "prettier": "^1.13.7"
+    },
+    "prettier": {
+        "printWidth": 120,
+        "tabWidth": 4,
+        "singleQuote": true,
+        "trailingComma": "all"
+    },
+    "scripts": {
+        "precommit": "yarn run format",
+        "postcommit": "git add .",
+        "format": "git diff origin/master... --name-only --diff-filter=ACM | grep -E \"\\.(js|json)$\" | xargs prettier --write; git add --all",
+        "clean": "rm -rf dist",
+        "build:legacy": "BABEL_ENV=legacy babel src -d dist/legacy",
+        "build:modern": "BABEL_ENV=modern babel src -d dist/modern",
+        "build": "yarn run clean && yarn build:legacy && yarn build:modern",
+        "prepublish": "yarn build"
+    }
 }

@@ -6,3 +6,10 @@ module.exports.checkStatuses = {
     pending: 'pending',
     success: 'success',
 };
+
+module.exports.checkStatusMessages = {
+    error: "Don't worry, anything can be fixed!",
+    failure: 'Something went wrong.',
+    pending: 'Please wait...',
+    success: 'All good!',
+};
