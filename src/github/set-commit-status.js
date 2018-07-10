@@ -1,7 +1,7 @@
 const readPullRequestInfo = require('./read-pull-request-info');
 const octokit = require('@octokit/rest')();
 const getRepoInfo = require('../helpers/get-repo-info');
-const { checkStatuses } = require('../commons/constants');
+const { checkStatuses, checkStatusMessages } = require('../commons/constants');
 
 octokit.authenticate({
     type: 'app',
@@ -23,8 +23,9 @@ module.exports = async function setCommitStatus(status) {
         repo,
         sha,
         state,
-        target_url: 'https://jenkins.app.eiq/fill-this',
-        description: 'Foo bar baz description.',
+        // TODO: make this automatic
+        // target_url: 'https://foo.bar/',
+        description: checkStatusMessages[status],
         context: 'gren',
     });
 };

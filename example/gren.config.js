@@ -32,29 +32,29 @@ module.exports.tasks.foo = async ({ warn }) => {
 
 const Item = ({ text }) => <li>{text}</li>;
 
-module.exports.buildReport = ({ messages, warnings, fails, performance }) => (
+module.exports.buildReport = props => (
     <p>
-        {messages ? (
+        {props.messages ? (
             <>
                 <h1>Messages</h1>
-                <ul>{messages.map(message => <Item text={message} />)}</ul>
+                <ul>{props.messages.map(message => <Item text={message} />)}</ul>
             </>
         ) : null}
 
-        {warnings ? (
+        {props.warnings ? (
             <>
                 <h1>Warnings</h1>
-                <ul>{warnings.map(warning => <Item text={warning} />)}</ul>
+                <ul>{props.warnings.map(warning => <Item text={warning} />)}</ul>
             </>
         ) : null}
 
-        {fails ? (
+        {props.fails ? (
             <>
                 <h1>Fails</h1>
-                <ul>{fails.map(fail => <Item text={fail} />)}</ul>
+                <ul>{props.fails.map(fail => <Item text={fail} />)}</ul>
             </>
         ) : null}
 
-        <p>{JSON.stringify(performance, null, 2)}</p>
+        <p>{JSON.stringify(props, null, 2)}</p>
     </p>
 );
