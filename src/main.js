@@ -15,10 +15,20 @@ async function main(cwd, argv) {
         flags: {
             config: {
                 type: 'string',
-                default: `gren.config.js`,
+                default: 'gren.config.js',
+            },
+            silent: {
+                type: 'boolean',
+                default: false,
             },
         },
     });
+
+    const { silent } = cli.flags;
+
+    if (silent) {
+        process.env.GREN_SILENT = true;
+    }
 
     const exitCode = await gren({
         config: `${cwd}/${cli.flags.config}`,

@@ -2,18 +2,19 @@ import { exec } from 'child_process';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import submitBotReport from './github/submit-bot-report';
-import { getState } from './index';
+import * as api from './index';
 import setCommitStatus from './github/set-commit-status';
 import getTranspiledConfig from './helpers/get-transpiled-config';
 import { secondsSince, borderText, reflect } from './helpers/utils';
 import { checkStatuses } from './commons/constants';
+import log from './helpers/log'
 
 function cmd(command, name) {
     return new Promise((resolve, reject) => {
         exec(command, (error, stdout) => {
-            console.log(borderText(name));
-            console.log();
-            console.log(stdout);
+            log(borderText(name));
+            log();
+            log(stdout);
 
             if (error) {
                 reject(stdout.trim());
@@ -36,9 +37,8 @@ async function gren({ config: configPath }) {
     await Promise.all(
         Object.entries(config.tasks)
             .map(([name, task]) => async () => {
-                // TODO: pass in useful data to the job
                 const start = Date.now();
-                const job = await task();
+                const job = await task(api);
 
                 if (job.command) {
                     let result = null;
@@ -60,9 +60,11 @@ async function gren({ config: configPath }) {
     performance.main = secondsSince(mainStart);
 
     const state = {
-        ...getState(),
+        ...api.getState(),
         performance,
     };
+    
+    console.log('WATCH', '>>>> state', state);
 
     const exitCode = state.fails ? state.fails.length : 0;
 
@@ -74,7 +76,7 @@ async function gren({ config: configPath }) {
 
     await setCommitStatus(exitCode ? checkStatuses.failure : checkStatuses.success);
 
-    console.log(`Gren successfully finished with exit code ${exitCode}.`);
+    log(`Gren successfully finished with exit code ${exitCode}.`);
 
     return exitCode;
 }

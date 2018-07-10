@@ -1,5 +1,5 @@
 const React = require('react');
-const { message, warn, fail, checkCommand, saveToKey } = require('../src/index');
+// const { message, warn, fail, checkCommand, saveToKey } = require('../src/index');
 
 // the way to add pre-defined tasks from npm
 module.exports.tasks = {
@@ -10,7 +10,7 @@ module.exports.tasks = {
 
 // adding own tasks
 
-module.exports.tasks.eslint = () => ({
+module.exports.tasks.eslint = ({ message, fail, saveToKey, yeah }) => ({
     command: './example/scripts/lint.sh',
     onSuccess: () => message(`${yeah()} There are no lint errors on touched lines!`),
     onError: stdout => {
@@ -25,7 +25,7 @@ module.exports.tasks.eslint = () => ({
     },
 });
 
-module.exports.tasks.foo = async () => {
+module.exports.tasks.foo = async ({ warn }) => {
     await new Promise(resolve => setTimeout(resolve, 1000));
     warn('bar baz!');
 };
