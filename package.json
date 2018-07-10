@@ -1,5 +1,5 @@
 {
-    "name": "gren",
+    "name": "grenjs",
     "version": "0.1.0",
     "description": "git pull request tools",
     "main": "src/index.js",
