@@ -1,3 +1,5 @@
+const { yeah } = require('./helpers/utils')
+
 function checkCommand(command) {}
 
 let state = {};
@@ -27,4 +29,5 @@ module.exports = {
     warn,
     fail,
     getState,
+    yeah,
 };
