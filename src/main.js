@@ -21,6 +21,9 @@ async function main(cwd, argv) {
                 type: 'boolean',
                 default: false,
             },
+            sourceBranch: {
+                type: 'string',
+            },
             printHtmlReport: {
                 type: 'boolean',
                 default: false,
@@ -28,7 +31,7 @@ async function main(cwd, argv) {
         },
     });
 
-    const { silent, printHtmlReport } = cli.flags;
+    const { silent, printHtmlReport, sourceBranch } = cli.flags;
 
     if (silent) {
         process.env.GREN_SILENT = true;
@@ -36,6 +39,10 @@ async function main(cwd, argv) {
 
     if (printHtmlReport) {
         process.env.GREN_PRINT_HTML_REPORT = true;
+    }
+
+    if (sourceBranch) {
+        process.env.GREN_SOURCE_BRANCH = sourceBranch;
     }
 
     const exitCode = await gren({
