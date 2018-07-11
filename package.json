@@ -1,6 +1,6 @@
 {
     "name": "grenjs",
-    "version": "0.1.5",
+    "version": "0.1.6",
     "description": "git pull request tools",
     "main": "src/index.js",
     "bin": {
