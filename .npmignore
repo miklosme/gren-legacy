@@ -3,3 +3,5 @@ src
 .gitignore
 .npmignore
 example
+*.log
+.idea
