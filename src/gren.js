@@ -70,7 +70,7 @@ async function gren({ config: configPath }) {
 
     const exitCode = state.fails ? state.fails.length : 0;
 
-    const DefaultReport = <h1>pretty dope pr, my dude!</h1>;
+    const DefaultReport = () => <h1>pretty dope pr, my dude!</h1>;
     const Report = config.buildReport || DefaultReport;
     const htmlReport = ReactDOMServer.renderToStaticMarkup(<Report {...state} />);
 

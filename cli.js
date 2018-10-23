@@ -8,8 +8,12 @@ var cli;
 if (majorVer < 4) {
     throw new Error('Node version ' + ver + ' is not supported in Gren, please use Node.js 4.0 or higher.');
 } else if (majorVer < 8) {
+    process.env.BABEL_ENV = 'legacy';
+    process.env.NODE_ENV = 'legacy';
     cli = require('./dist/legacy/main').default;
 } else {
+    process.env.BABEL_ENV = 'modern';
+    process.env.NODE_ENV = 'modern';
     cli = require('./dist/modern/main').default;
 }
 
