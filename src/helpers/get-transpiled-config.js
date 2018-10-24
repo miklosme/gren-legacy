@@ -1,13 +1,16 @@
+import path from 'path';
 import { transformFile } from '@babel/core';
 import requireFromString from 'require-from-string';
 
-export default function getTranspiledConfig(path) {
+const configFile = path.resolve(__dirname, '../../../babel.config.js');
+
+export default function getTranspiledConfig(configPath) {
     return new Promise((resolve, reject) => {
-        transformFile(path, (error, result) => {
+        transformFile(configPath, { configFile }, (error, result) => {
             if (error) {
                 reject(error);
             } else {
-                resolve(requireFromString(result.code));
+                resolve(requireFromString(result.code, { prependPaths: [process.cwd()] }));
             }
         });
     });
