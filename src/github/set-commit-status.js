@@ -27,6 +27,6 @@ module.exports = async function setCommitStatus(status) {
         // BUILD_URL comes from jenkins
         target_url: process.env.BUILD_URL,
         description: checkStatusMessages[status],
-        context: 'gren',
+        context: 'Gren',
     });
 };
