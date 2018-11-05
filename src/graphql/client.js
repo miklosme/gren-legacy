@@ -10,4 +10,6 @@ const client = new GraphQLClient('https://api.github.com/graphql', {
     },
 });
 
+// jsut a test
+
 module.exports = client;
