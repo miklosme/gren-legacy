@@ -4,6 +4,8 @@ import ReactDOMServer from 'react-dom/server';
 import submitBotReport from './github/submit-bot-report';
 import * as api from './index';
 import setCommitStatus from './github/set-commit-status';
+import listChangedFiles from './github/list-changed-files';
+import readPullRequestInfo from './github/read-pull-request-info';
 import getTranspiledConfig from './helpers/get-transpiled-config';
 import { secondsSince, borderText, reflect } from './helpers/utils';
 import { checkStatuses } from './commons/constants';
@@ -32,14 +34,23 @@ async function gren({ config: configPath }) {
         tasks: {},
     };
 
-    await setCommitStatus(checkStatuses.pending);
+    const data = await readPullRequestInfo();
+    const sha = data.repository.pullRequests.edges[0].node.headRef.target.oid;
+    const number = data.repository.pullRequests.edges[0].node.number;
+
+    const changedFilesResponse = await listChangedFiles(number);
+    const changedFiles = changedFilesResponse.data
+        .filter(file => file.status === 'added' || file.status === 'modified')
+        .map(file => file.filename);
+
+    await setCommitStatus(sha, checkStatuses.pending);
 
     await Promise.all(
         Object.entries(config.tasks)
             .map(([name, task]) => async () => {
                 const start = Date.now();
                 try {
-                    const job = await task(api);
+                    const job = await task({ ...api, changedFiles });
 
                     if (job !== null && typeof job === 'object' && job.command) {
                         let result = null;
@@ -80,7 +91,7 @@ async function gren({ config: configPath }) {
 
     await submitBotReport(htmlReport);
 
-    await setCommitStatus(exitCode ? checkStatuses.failure : checkStatuses.success);
+    await setCommitStatus(sha, exitCode ? checkStatuses.failure : checkStatuses.success);
 
     log(`Gren successfully finished with exit code ${exitCode}.`);
 

@@ -9,6 +9,7 @@ const query = `
                 edges {
                     node {
                         id
+                        number
                         title
                         bodyHTML
                         changedFiles
