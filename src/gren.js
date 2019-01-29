@@ -58,6 +58,7 @@ async function gren({ config: configPath }) {
                             result = await cmd(job.command, name);
                             if (job.onSuccess) job.onSuccess(result);
                         } catch (errorResult) {
+                            result = errorResult;
                             if (job.onError) job.onError(errorResult);
                         }
 
